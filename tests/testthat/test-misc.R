@@ -2,6 +2,7 @@ context("misc functions")
 
 test_that("fast collapsing for ncdfFlowSet", {
       library(openCyto)
+      library(ncdfFlow)
       data(GvHD)
       fs <- GvHD[pData(GvHD)$Patient %in% 6:7][1:4]
       suppressMessages(ncfs <- ncdfFlowSet(fs))

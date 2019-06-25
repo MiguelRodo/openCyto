@@ -4,6 +4,7 @@ dataDir <- system.file("extdata",package="flowWorkspaceData")
 gs <- load_gs(list.files(dataDir, pattern = "gs_manual",full = TRUE))
 gs1 <- gs_clone(gs)
 gs2 <- gs_clone(gs)
+library(flowCore)
 
 test_that("gs_remove_gating_method testing", {
   snapshot_pre <- gs_get_pop_paths(gs)
