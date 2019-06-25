@@ -59,7 +59,7 @@
 #' @importFrom flowClust rbox
 #' @noRd 
 .getEllipse <- function(filter = NULL, include = seq_len(filter@K), ecol = 1, elty = 1, 
-  quantile = NULL, npoints = 50, subset = c(1, 2),...) {
+  quantile = NULL, npoints = 50, subset = c(1, 2), ...) {
   .Defunct(".getEllipseGate")
   # Sets the quantile of the ellipse.
   if (is.null(quantile)) {
@@ -127,7 +127,7 @@
 #' when trans = 0  
 #' @noRd 
 .getEllipseGate <- function(filter = NULL, include = seq_len(filter@K), ecol = 1, elty = 1, 
-    quantile = NULL, npoints = 50, subset = c(1, 2),...) {
+    quantile = NULL, npoints = 50, subset = c(1, 2), eigen_stretch = c(1,1), ...) {
   
   # Sets the quantile of the ellipse.
   if (is.null(quantile)) {
@@ -178,6 +178,11 @@
   coln <- as.vector(filter@varNames)
   for (i in include) {
     cov.mat <- filter@sigma[i,subset, subset]
+    if(!identical( as.numeric( eigen_stretch ), c(1,1) ) ){
+      eigen_decomp <- eigen( cov.mat )
+      eigen_decomp$values <- eigen_decomp$values * eigen_stretch
+      cov.mat <- eigen_decomp$vectors %*% diag(eigen_decomp$values) %*% t( eigen_decomp$vectors )
+    }
     
     #fit polygon points 
     if ((length(lambda) > 0)&trans==1) {

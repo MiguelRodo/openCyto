@@ -401,7 +401,7 @@ gate_flowclust_2d <- function(fr, xChannel, yChannel, filterId = "", K = 2,
                          , nstart = 1 #change kmeans nstart
                          , plot = FALSE, target = NULL, transitional = FALSE,
                          quantile = 0.9, translation = 0.25, transitional_angle = NULL,
-                         min = NULL, max = NULL, ...) {
+                         min = NULL, max = NULL, eigen_stretch = c(1,1), ...) {
   options("cores" = 1L) ##suppress parallelism since it may lock the process due to the lack of resource when parallel gating was already using up the cores. 
   
   if (!is.null(target)) {
@@ -463,7 +463,7 @@ gate_flowclust_2d <- function(fr, xChannel, yChannel, filterId = "", K = 2,
 
   if (!transitional) {
     flowClust_gate <- .getEllipseGate(filter = tmix_results, include = cluster_selected,
-                                   quantile = quantile,trans=trans)
+                                   quantile = quantile,trans=trans, eigen_stretch = eigen_stretch )
     
   } else {
     chisq_quantile <- qchisq(quantile, df = 2)
@@ -651,11 +651,11 @@ gate_flowClust_2d <- function(fr, xChannel, yChannel, filterId = "", K = 2,
                               , nstart = 1 #change kmeans nstart
                               , plot = FALSE, target = NULL, transitional = FALSE,
                               quantile = 0.9, translation = 0.25, transitional_angle = NULL,
-                              min = NULL, max = NULL, ...) {
+                              min = NULL, max = NULL, eigen_stretch = c(1,1), ...) {
   .Deprecated("gate_flowclust_2d")
   gate_flowclust_2d(fr, xChannel, yChannel, filterId, K, usePrior, prior, trans
                     , min.count, max.count, nstart, plot, target, transitional
-                    , quantile, translation, transitional_angle, min, max, ...)
+                    , quantile, translation, transitional_angle, min, max, eigen_stretch, ...)
 }
 
 #' @rdname gate_flowclust_2d 
