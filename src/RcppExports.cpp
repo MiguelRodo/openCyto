@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // getTautStringApprox
 Rcpp::List getTautStringApprox(std::vector<double> dataVec);
-RcppExport SEXP _openCyto_getTautStringApprox(SEXP dataVecSEXP) {
+RcppExport SEXP _openCytoFork_getTautStringApprox(SEXP dataVecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,7 +18,7 @@ END_RCPP
 }
 // collapseData
 NumericMatrix collapseData(List mat_list, StringVector colnames);
-RcppExport SEXP _openCyto_collapseData(SEXP mat_listSEXP, SEXP colnamesSEXP) {
+RcppExport SEXP _openCytoFork_collapseData(SEXP mat_listSEXP, SEXP colnamesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,7 +30,7 @@ END_RCPP
 }
 // singleDip
 double singleDip(const std::vector<double>& x);
-RcppExport SEXP _openCyto_singleDip(SEXP xSEXP) {
+RcppExport SEXP _openCytoFork_singleDip(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -41,7 +41,7 @@ END_RCPP
 }
 // tsGates
 std::vector<double> tsGates(const std::vector<double>& xVec, int modePrior);
-RcppExport SEXP _openCyto_tsGates(SEXP xVecSEXP, SEXP modePriorSEXP) {
+RcppExport SEXP _openCytoFork_tsGates(SEXP xVecSEXP, SEXP modePriorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -52,18 +52,15 @@ BEGIN_RCPP
 END_RCPP
 }
 
-RcppExport SEXP unlockNamespace(SEXP);
-
 static const R_CallMethodDef CallEntries[] = {
-    {"_openCyto_getTautStringApprox", (DL_FUNC) &_openCyto_getTautStringApprox, 1},
-    {"_openCyto_collapseData", (DL_FUNC) &_openCyto_collapseData, 2},
-    {"_openCyto_singleDip", (DL_FUNC) &_openCyto_singleDip, 1},
-    {"_openCyto_tsGates", (DL_FUNC) &_openCyto_tsGates, 2},
-    {"unlockNamespace", (DL_FUNC) &unlockNamespace, 1},
+    {"_openCytoFork_getTautStringApprox", (DL_FUNC) &_openCytoFork_getTautStringApprox, 1},
+    {"_openCytoFork_collapseData", (DL_FUNC) &_openCytoFork_collapseData, 2},
+    {"_openCytoFork_singleDip", (DL_FUNC) &_openCytoFork_singleDip, 1},
+    {"_openCytoFork_tsGates", (DL_FUNC) &_openCytoFork_tsGates, 2},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_openCyto(DllInfo *dll) {
+RcppExport void R_init_openCytoFork(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
